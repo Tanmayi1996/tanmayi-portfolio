@@ -1,44 +1,20 @@
-<<<<<<< HEAD
-# Website
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+# Tanmayi R S — Technical Writing Portfolio
 
-## Installation
+A public portfolio site and sample technical communication projects.
 
-```bash
-yarn
-```
+## Website
+The portfolio is published with GitHub Pages at:
+https://tanmayi1996.github.io/tanmayi-portfolio/
 
-## Local Development
+## Projects
+- [AI Release Notes Generator](./ai-release-notes-generator/)
+- [API Documentation Toolkit](./api-documentation-toolkit/)
+- [Documentation Quality Checker](./documentation-quality-checker/)
 
-```bash
-yarn start
-```
+All project data and the sample API are fictional. Review generated content before publication.
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+## Local preview
+Open `index.html` in a modern browser.
 
-## Build
-
-```bash
-yarn build
-```
-
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
-## Deployment
-
-Using SSH:
-
-```bash
-USE_SSH=true yarn deploy
-```
-
-Not using SSH:
-
-```bash
-GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
-=======
-# tanmayi-portfolio
->>>>>>> a6a5b72867d4c255d775ef8ea14a2e2b646c10d3
+## GitHub Pages
+The `.github/workflows/pages.yml` workflow deploys the static portfolio from the repository root whenever changes are pushed to `main`.
