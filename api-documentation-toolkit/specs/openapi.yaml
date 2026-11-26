@@ -1,0 +1,135 @@
+openapi: 3.1.0
+info:
+  title: Atlas Tasks API
+  version: 1.0.0
+  description: Fictional task-management API for a technical writing portfolio example.
+servers:
+  - url: https://api.example.com/v1
+    description: Example server; not a live service
+tags:
+  - name: Tasks
+    description: Create and manage tasks
+paths:
+  /tasks:
+    get:
+      tags: [Tasks]
+      summary: List tasks
+      description: Returns tasks visible to the authenticated user.
+      operationId: listTasks
+      parameters:
+        - name: status
+          in: query
+          required: false
+          description: Filter tasks by status.
+          schema:
+            type: string
+            enum: [open, completed]
+        - name: limit
+          in: query
+          required: false
+          description: Maximum number of tasks to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+      responses:
+        '200':
+          description: Tasks returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [items, count]
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Task'
+                  count:
+                    type: integer
+              example:
+                items:
+                  - id: task_123
+                    title: Review onboarding guide
+                    status: open
+                count: 1
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      tags: [Tasks]
+      summary: Create a task
+      operationId: createTask
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTask'
+            example:
+              title: Review onboarding guide
+              description: Check links and screenshots.
+      responses:
+        '201':
+          description: Task created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '400':
+          description: Request validation failed.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /tasks/{taskId}:
+    parameters:
+      - name: taskId
+        in: path
+        required: true
+        description: Unique task identifier.
+        schema:
+          type: string
+    get:
+      tags: [Tasks]
+      summary: Get a task
+      operationId: getTask
+      responses:
+        '200':
+          description: Task returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '404':
+          description: No task matches the supplied ID.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    CreateTask:
+      type: object
+      required: [title]
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 120
+          description: Short task title.
+        description:
+          type: string
+          maxLength: 2000
+          description: Optional task details.
+    Task:
+      allOf:
+        - $ref: '#/components/schemas/CreateTask'
+        - type: object
+          required: [id, status]
+          properties:
+            id:
+              type: string
+              example: task_123
+            status:
+              type: string
+              enum: [open, completed]
+  responses:
+    Unauthorized:
+      description: Authentication is missing or invalid.
