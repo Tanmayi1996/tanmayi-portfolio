@@ -1,0 +1,28 @@
+{
+  "product": "Atlas Workspace",
+  "version": "2.4.0",
+  "release_date": "2026-11-26",
+  "changes": [
+    {
+      "type": "feature",
+      "title": "Export workspace activity",
+      "description": "Workspace administrators can export activity logs as CSV for audits and internal reporting.",
+      "audience": "admins",
+      "area": "Audit and compliance"
+    },
+    {
+      "type": "improvement",
+      "title": "Faster member search",
+      "description": "Member search now returns results more quickly for large workspaces.",
+      "audience": "all",
+      "area": "Workspace management"
+    },
+    {
+      "type": "fix",
+      "title": "Corrected timezone in scheduled reports",
+      "description": "Scheduled reports now display the configured workspace timezone.",
+      "audience": "admins",
+      "area": "Reporting"
+    }
+  ]
+}
